@@ -45,7 +45,7 @@ public class SimahBankController {
              return readFiles.bronzeReportResponse();
         }
         else {
-            return " Please 3provide all the required fields";
+            return " Please 3provide all the required fields test";
         }
     }
 
