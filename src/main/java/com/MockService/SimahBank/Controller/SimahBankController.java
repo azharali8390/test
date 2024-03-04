@@ -5,6 +5,7 @@ import com.MockService.SimahBank.Dto.BronzeApiRequestDto;
 import com.MockService.SimahBank.service.BronzeSilverReportService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,12 @@ public class SimahBankController {
     @Autowired
     private final BronzeSilverReportService readFiles;
 
+    @GetMapping("/hello")
+    public String hello() throws IOException, JSONException {
+
+      return "hello world";
+    }
+
     @PostMapping("/Identity/login")
     public String authenticate(@RequestBody AuthenticationRequestDto authenticationRequestDto) {
         if(StringUtils.isNotBlank(authenticationRequestDto.getUsername()) &&
@@ -37,7 +44,7 @@ public class SimahBankController {
     }
 
     @GetMapping("/enquiry/commercial/bronze")
-    public String BronzeApi(@RequestBody BronzeApiRequestDto bronzeApiRequestDto) throws IOException {
+    public String BronzeApi(@RequestBody BronzeApiRequestDto bronzeApiRequestDto) throws IOException, JSONException {
 
         if(StringUtils.isNotBlank(bronzeApiRequestDto.getIdIssuer() ) &&
                 ObjectUtils.isNotEmpty(bronzeApiRequestDto.getIdNumber()) )
@@ -45,7 +52,7 @@ public class SimahBankController {
              return readFiles.bronzeReportResponse();
         }
         else {
-            return " Please 3provide all the required fields test";
+            return null;
         }
     }
 
